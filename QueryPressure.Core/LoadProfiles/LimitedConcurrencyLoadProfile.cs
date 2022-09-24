@@ -1,6 +1,6 @@
-﻿using QueryPressure.Interfaces;
+﻿using QueryPressure.Core.Interfaces;
 
-namespace QueryPressure.LoadProfiles;
+namespace QueryPressure.Core.LoadProfiles;
 
 public class LimitedConcurrencyLoadProfile : IProfile
 {

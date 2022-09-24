@@ -5,7 +5,9 @@ VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryPressure", "QueryPressure\QueryPressure.csproj", "{2D92784D-144A-4285-942C-0B2B8739A376}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryPressure.Tests", "QueryPressure.Tests\QueryPressure.Tests.csproj", "{689D1E3D-13DD-4774-AD75-70BDB813BC02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryPressure.Tests", "QueryPressure.Tests\QueryPressure.Tests.csproj", "{689D1E3D-13DD-4774-AD75-70BDB813BC02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueryPressure.Core", "QueryPressure.Core\QueryPressure.Core.csproj", "{B3CBE85E-1B80-4CF3-8543-FD9AADC56542}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{689D1E3D-13DD-4774-AD75-70BDB813BC02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{689D1E3D-13DD-4774-AD75-70BDB813BC02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{689D1E3D-13DD-4774-AD75-70BDB813BC02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3CBE85E-1B80-4CF3-8543-FD9AADC56542}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3CBE85E-1B80-4CF3-8543-FD9AADC56542}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3CBE85E-1B80-4CF3-8543-FD9AADC56542}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3CBE85E-1B80-4CF3-8543-FD9AADC56542}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

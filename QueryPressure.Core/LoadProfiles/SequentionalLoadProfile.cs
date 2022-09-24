@@ -1,6 +1,6 @@
-﻿using QueryPressure.Interfaces;
+﻿using QueryPressure.Core.Interfaces;
 
-namespace QueryPressure.LoadProfiles;
+namespace QueryPressure.Core.LoadProfiles;
 
 /// <summary>
 /// Профиль загрузки с последовательным выполнением задач

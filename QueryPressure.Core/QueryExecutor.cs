@@ -1,6 +1,6 @@
-﻿using QueryPressure.Interfaces;
+﻿using QueryPressure.Core.Interfaces;
 
-namespace QueryPressure;
+namespace QueryPressure.Core;
 
 public class QueryExecutor
 {

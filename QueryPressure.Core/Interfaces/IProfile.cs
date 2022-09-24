@@ -1,4 +1,4 @@
-﻿namespace QueryPressure.Interfaces;
+﻿namespace QueryPressure.Core.Interfaces;
 
 public interface IProfile
 {

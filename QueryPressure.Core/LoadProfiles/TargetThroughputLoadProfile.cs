@@ -1,6 +1,6 @@
-﻿using QueryPressure.Interfaces;
+﻿using QueryPressure.Core.Interfaces;
 
-namespace QueryPressure.LoadProfiles;
+namespace QueryPressure.Core.LoadProfiles;
 
 /// <summary>
 /// Профиль загрузки с возможностью задавать нагрузку в виде кол-ва задач в секунду
@@ -8,7 +8,7 @@ namespace QueryPressure.LoadProfiles;
 public class TargetThroughputLoadProfile : IProfile
 {
     private readonly TimeSpan _delay;
-    private DateTime? _nextExecution; 
+    private DateTime? _nextExecution;
 
     public TargetThroughputLoadProfile(int targetRPS)
     {
