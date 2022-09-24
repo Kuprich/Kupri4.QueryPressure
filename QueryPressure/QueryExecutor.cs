@@ -15,7 +15,7 @@ public class QueryExecutor
 
     public async Task ExecuteAsync(CancellationToken cancellationToken)
     {
-        while (await _loadProfile.WhenNextCanBeExecuted(cancellationToken))
+        while (await _loadProfile.WhenNextCanBeExecutedAsync(cancellationToken))
         {
             await _executable.ExecuteAsync(cancellationToken);
         }

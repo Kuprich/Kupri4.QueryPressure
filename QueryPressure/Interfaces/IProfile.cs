@@ -2,5 +2,6 @@
 
 public interface IProfile
 {
-    Task<bool> WhenNextCanBeExecuted(CancellationToken cancellationToken);
+    Task<bool> WhenNextCanBeExecutedAsync(CancellationToken cancellationToken);
+    Task OnQueryExecutedAsync(CancellationToken cancellationToken);
 }
