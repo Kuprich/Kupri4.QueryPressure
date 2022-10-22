@@ -39,9 +39,9 @@ profile:
 
 var @params = Deserialize(file);
 
-var factory = new LoadProfilesFactory(new[] { new LimitedConcurrencyLoadProfileCreator() });
+//var factory = new ProfilesFactory(new[] { new LimitedConcurrencyLoadProfileCreator() });
 
-var model = factory.CreateProfile(@params);
+//var model = factory.CreateProfile(@params);
 
 Console.WriteLine();
 

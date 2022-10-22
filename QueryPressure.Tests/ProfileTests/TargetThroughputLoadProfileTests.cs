@@ -1,4 +1,5 @@
-﻿using QueryPressure.LoadProfiles;
+﻿using QueryPressure.Core.LoadProfiles;
+using QueryPressure.LoadProfiles;
 
 namespace QueryPressure.Tests;
 

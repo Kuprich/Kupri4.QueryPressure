@@ -2,14 +2,13 @@
 
 namespace QueryPressure.Core.LoadProfiles;
 
-public class LimitedConcurrencyLoadProfile : IProfile
+public class LimitedConcurrencyLoadProfile : IProfile, IExecutionHook
 {
-    private readonly int _limit;
+
     private readonly SemaphoreSlim _semaphore;
 
     public LimitedConcurrencyLoadProfile(int limit)
     {
-        _limit = limit;
         _semaphore = new SemaphoreSlim(limit);
     }
     public Task OnQueryExecutedAsync(CancellationToken cancellationToken = default)
@@ -18,9 +17,8 @@ public class LimitedConcurrencyLoadProfile : IProfile
         return Task.CompletedTask;
     }
 
-    public async Task<bool> WhenNextCanBeExecutedAsync(CancellationToken cancellationToken = default)
+    public async Task WhenNextCanBeExecutedAsync(CancellationToken cancellationToken = default)
     {
         await _semaphore.WaitAsync(cancellationToken);
-        return cancellationToken.IsCancellationRequested;
     }
 }

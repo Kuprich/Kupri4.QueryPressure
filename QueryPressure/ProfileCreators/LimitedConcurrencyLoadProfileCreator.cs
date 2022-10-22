@@ -2,16 +2,19 @@
 using QueryPressure.Arguments;
 using QueryPressure.Core.Interfaces;
 using QueryPressure.Core.LoadProfiles;
+using QueryPressure.Extensions;
 using QueryPressure.Interfaces;
 
 namespace QueryPressure.ProfileCreators;
 
 // файлы, в которых будет как-то описываться тест. 
-class LimitedConcurrencyLoadProfileCreator : IProfileCreator
+public class LimitedConcurrencyLoadProfileCreator : ICreator<IProfile>
 {
-    public string ProfileTypeName => "limitedConcurrency";
-    public IProfile Create(ProfileArguments profile)
+    public string TypeName => "LimitedConcurrency";
+    public IProfile Create(SectionArguments section)
     {
-        return new LimitedConcurrencyLoadProfile(int.Parse(profile.Arguments["limit"]));
+        return new LimitedConcurrencyLoadProfile(
+            section.ExtractIntArgumentOrThrow("limit")
+        );
     }
 }

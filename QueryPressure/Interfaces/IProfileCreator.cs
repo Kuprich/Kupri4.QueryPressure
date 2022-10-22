@@ -4,8 +4,8 @@ using QueryPressure.Core.Interfaces;
 
 namespace QueryPressure.Interfaces;
 
-internal interface IProfileCreator
+public interface ICreator<T>
 {
-    string ProfileTypeName { get; }
-    IProfile Create(ProfileArguments profile);
+    string TypeName { get; }
+    T Create(SectionArguments section);
 }

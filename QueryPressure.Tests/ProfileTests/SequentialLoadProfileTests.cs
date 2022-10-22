@@ -2,20 +2,20 @@ using QueryPressure.LoadProfiles;
 
 namespace QueryPressure.Tests;
 
-public class SequentionalLoadProfileTests
+public class SequentialLoadProfileTests
 {
     [Fact]
-    public void SequentionalLoadProfile_FirstCall_ReturnsCompletedTask()
+    public void SequentialLoadProfile_FirstCall_ReturnsCompletedTask()
     {
-        var profile = new SequentionalLoadProfile();
+        var profile = new SequentialLoadProfile();
         var task = profile.WhenNextCanBeExecutedAsync();
         Assert.True(task.IsCompletedSuccessfully);
     }
     
     [Fact]
-    public async Task SequentionalLoadProfile_SecondCall_ReturnsCompletedTask()
+    public async Task SequentialLoadProfile_SecondCall_ReturnsCompletedTask()
     {
-        var profile = new SequentionalLoadProfile();
+        var profile = new SequentialLoadProfile();
         _ = profile.WhenNextCanBeExecutedAsync();
 
         var task = profile.WhenNextCanBeExecutedAsync();

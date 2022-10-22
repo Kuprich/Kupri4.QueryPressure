@@ -1,11 +1,11 @@
 ﻿using QueryPressure.Core.Interfaces;
 
-namespace QueryPressure.Core.LoadProfiles;
+namespace QueryPressure.LoadProfiles;
 
 /// <summary>
 /// Профиль загрузки с последовательным выполнением задач
 /// </summary>
-public class SequentionalLoadProfile : IProfile
+public class SequentialLoadProfile : IProfile, IExecutionHook
 {
     private TaskCompletionSource? _taskCompletionSource;
     public Task OnQueryExecutedAsync(CancellationToken cancellationToken = default)
@@ -20,7 +20,7 @@ public class SequentionalLoadProfile : IProfile
         return Task.CompletedTask;
     }
 
-    public async Task<bool> WhenNextCanBeExecutedAsync(CancellationToken cancellationToken = default)
+    public async Task WhenNextCanBeExecutedAsync(CancellationToken cancellationToken = default)
     {
         if (_taskCompletionSource != null)
         {
@@ -28,10 +28,5 @@ public class SequentionalLoadProfile : IProfile
         }
 
         _taskCompletionSource = new();
-
-        var result = cancellationToken.IsCancellationRequested;
-
-        return result;
-
     }
 }

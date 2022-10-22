@@ -1,14 +1,15 @@
-﻿using QueryPressure.LoadProfiles;
+﻿using QueryPressure.Core.LoadProfiles;
+using QueryPressure.LoadProfiles;
 using Xunit;
 
 namespace QueryPressure.Tests;
 
-public class SequentionalLoadProfileWithDelayTests
+public class SequentialLoadProfileWithDelayTests
 {
     [Fact]
     public void WhenNextCanBeExecutedAsync_FirstCall_ReturnsCompletedTask()
     {
-        var profile = new SequentionalLoadProfileWithDelay(TimeSpan.FromMilliseconds(500));
+        var profile = new SequentialLoadWithDelayProfile(TimeSpan.FromMilliseconds(500));
         var task = profile.WhenNextCanBeExecutedAsync();
         Assert.True(task.IsCompletedSuccessfully);
     }
@@ -16,15 +17,15 @@ public class SequentionalLoadProfileWithDelayTests
     [Fact]
     public async void WhenNextCanBeExecutedAsync_SecondCall_CompletesOnlyAfter_OnQueryExecutedAsyncCalled_AndDelay()
     {
-        var profile = new SequentionalLoadProfileWithDelay(TimeSpan.FromMilliseconds(10));
+        var profile = new SequentialLoadWithDelayProfile(TimeSpan.FromMilliseconds(10));
         _ = profile.WhenNextCanBeExecutedAsync();
         var task = profile.WhenNextCanBeExecutedAsync();
+        Assert.False(task.IsCompleted);
 
         await Task.Delay(15);
         Assert.False(task.IsCompleted);
 
         await profile.OnQueryExecutedAsync();
-        await Task.Delay(10);
         Assert.False(task.IsCompleted);
 
         await Task.Delay(15);
