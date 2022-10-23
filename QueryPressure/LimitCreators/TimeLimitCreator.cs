@@ -8,7 +8,7 @@ namespace QueryPressure.LimitCreators;
 
 public class TimeLimitCreator : ICreator<ILimit>
 {
-    public string TypeName => "TimeLimit";
+    public string TypeName => "timeLimit";
 
     public ILimit Create(SectionArguments section)
     {

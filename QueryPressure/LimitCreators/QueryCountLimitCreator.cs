@@ -8,7 +8,7 @@ namespace QueryPressure.LimitCreators;
 
 public class QueryCountLimitCreator : ICreator<ILimit>
 {
-    public string TypeName => "QueryCountLimit";
+    public string TypeName => "queryCount";
 
     public ILimit Create(SectionArguments section)
     {

@@ -1,11 +1,6 @@
-﻿/* файлы, в которых будет как-то описываться тест, например*/
+﻿/* файлы, в которых будет как-то описываться тест*/
 
+namespace QueryPressure.Arguments;
 
-namespace QueryPressure.Arguments
-{
-    public class MainArguments
-    {
-        public SectionArguments? Profile { get; set; }
-        //public SectionArguments Limit { get; set; } = null!;
-    }
-}
+public class MainArguments : Dictionary<string, SectionArguments>
+{ }

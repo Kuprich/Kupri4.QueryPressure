@@ -7,22 +7,27 @@ namespace QueryPressure.Factories;
 
 public class SettingsFactory<T> where T : ISetting
 {
+    private readonly string _settingType;
     private IDictionary<string, ICreator<T>> _creators;
 
-    public SettingsFactory(IEnumerable<ICreator<T>> creatros)
+    public SettingsFactory(string settingType, IEnumerable<ICreator<T>> creatros)
     {
         _creators = creatros.ToDictionary(x => x.TypeName.ToLower());
+        _settingType = settingType;
     }
 
-    public T CreateProfile(MainArguments arguments)
+    public T Create(MainArguments arguments)
     {
-        var profile = arguments.Profile;
-
-        if (!_creators.TryGetValue(profile.Type.ToLower(), out var creator))
+        if (!arguments.TryGetValue(_settingType, out var section))
         {
-            throw new ApplicationException($"No profile with the name of {profile.Type}");
+            throw new ApplicationException($"No section {_settingType} was found");
         }
 
-        return creator.Create(profile);
+        if (!_creators.TryGetValue(section.Type.ToLower(), out var creator))
+        {
+            throw new ApplicationException($"No profile with the name of {section.Type}");
+        }
+
+        return creator.Create(section);
     }
 }

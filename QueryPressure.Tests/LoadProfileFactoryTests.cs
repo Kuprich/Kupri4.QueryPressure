@@ -10,13 +10,15 @@ using QueryPressure.Core.LoadProfiles;
 
 namespace QueryPressure.Tests;
 
+
+
 public class LoadProfileFactoryTests
 {
     private readonly SettingsFactory<IProfile> _factory;
 
     public LoadProfileFactoryTests()
     {
-        _factory = new SettingsFactory<IProfile>(new ICreator<IProfile>[]
+        _factory = new SettingsFactory<IProfile>("profile", new ICreator<IProfile>[]
         {
             new SequentialLoadProfileCreator(),
             new SequentialLoadWithDelayProfileCreator(),
@@ -29,7 +31,7 @@ public class LoadProfileFactoryTests
     private IProfile CreateProfile(string yml)
     {
         var args = Deserialize(yml);
-        return _factory.CreateProfile(args);
+        return _factory.Create(args);
     }
 
     private MainArguments Deserialize(string fileContent)
