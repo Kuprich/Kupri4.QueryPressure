@@ -1,6 +1,6 @@
 ﻿/* файлы, в которых будет как-то описываться тест*/
 
-namespace QueryPressure.Arguments;
+namespace QueryPressure.App.Arguments;
 
 public class MainArguments : Dictionary<string, SectionArguments>
 { }

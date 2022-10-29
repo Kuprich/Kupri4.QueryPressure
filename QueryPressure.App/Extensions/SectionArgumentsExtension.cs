@@ -1,13 +1,12 @@
-﻿using QueryPressure.Arguments;
-using System.Xml.Linq;
+﻿using QueryPressure.App.Arguments;
 
-namespace QueryPressure.Extensions;
+namespace QueryPressure.App.Extensions;
 
 public static class SectionArgumentsExtension
 {
     public static int ExtractIntArgumentOrThrow(this SectionArguments section, string argumentName)
     {
-        string val = ExtractStringArgumentOrThrow(section, argumentName);
+        string val = section.ExtractStringArgumentOrThrow(argumentName);
 
         if (!int.TryParse(val, out int result))
         {
@@ -19,7 +18,7 @@ public static class SectionArgumentsExtension
 
     public static TimeSpan ExtractTimeSpanArgumentOrThrow(this SectionArguments section, string argumentName)
     {
-        string val = ExtractStringArgumentOrThrow(section, argumentName);
+        string val = section.ExtractStringArgumentOrThrow(argumentName);
 
         if (!TimeSpan.TryParse(val, out TimeSpan result))
         {

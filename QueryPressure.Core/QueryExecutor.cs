@@ -2,7 +2,7 @@
 using System.Collections.Immutable;
 using System.Diagnostics;
 
-namespace QueryPressure;
+namespace QueryPressure.Core;
 
 public class QueryExecutor
 {

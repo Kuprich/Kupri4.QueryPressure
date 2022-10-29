@@ -1,12 +1,11 @@
-﻿using QueryPressure.Arguments;
+﻿using QueryPressure.App.Arguments;
+using QueryPressure.App.Factories;
+using QueryPressure.App.Interfaces;
+using QueryPressure.App.ProfileCreators;
 using QueryPressure.Core.Interfaces;
-using QueryPressure.Factories;
-using QueryPressure.Interfaces;
-using QueryPressure.ProfileCreators;
-using YamlDotNet.Serialization.NamingConventions;
-using YamlDotNet.Serialization;
-using QueryPressure.LoadProfiles;
 using QueryPressure.Core.LoadProfiles;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace QueryPressure.Tests;
 

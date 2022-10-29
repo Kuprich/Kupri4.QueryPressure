@@ -1,8 +1,6 @@
 ﻿using QueryPressure.Core.LoadProfiles;
-using QueryPressure.LoadProfiles;
-using Xunit;
 
-namespace QueryPressure.Tests;
+namespace QueryPressure.Tests.ProfileTests;
 
 public class SequentialLoadProfileWithDelayTests
 {

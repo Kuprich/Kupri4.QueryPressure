@@ -1,7 +1,4 @@
 ﻿// файлы, в которых будет как-то описываться тест. 
-using QueryPressure.Arguments;
-using QueryPressure.Factories;
-using QueryPressure.ProfileCreators;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 

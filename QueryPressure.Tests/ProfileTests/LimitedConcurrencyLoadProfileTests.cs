@@ -1,7 +1,6 @@
 ﻿using QueryPressure.Core.LoadProfiles;
-using QueryPressure.LoadProfiles;
 
-namespace QueryPressure.Tests;
+namespace QueryPressure.Tests.ProfileTests;
 
 public class LimitedConcurrencyLoadProfileTests
 {

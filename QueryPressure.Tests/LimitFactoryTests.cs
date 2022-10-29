@@ -1,26 +1,25 @@
-﻿using QueryPressure.Arguments;
+﻿using QueryPressure.App.Arguments;
+using QueryPressure.App.Factories;
+using QueryPressure.App.Interfaces;
+using QueryPressure.App.LimitCreators;
 using QueryPressure.Core.Interfaces;
-using QueryPressure.Factories;
-using QueryPressure.Interfaces;
-using QueryPressure.LimitCreators;
-using YamlDotNet.Serialization.NamingConventions;
-using YamlDotNet.Serialization;
-using QueryPressure.LoadProfiles;
 using QueryPressure.Core.Limits;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace QueryPressure.Tests;
 
 public class LimitFactoryTests
 {
-	private readonly SettingsFactory<ILimit> _factory;
-	public LimitFactoryTests()
-	{
-		_factory = new SettingsFactory<ILimit>("limit", new ICreator<ILimit>[]
-		{
-			new QueryCountLimitCreator(),
-			new TimeLimitCreator()
-		});
-	}
+    private readonly SettingsFactory<ILimit> _factory;
+    public LimitFactoryTests()
+    {
+        _factory = new SettingsFactory<ILimit>("limit", new ICreator<ILimit>[]
+        {
+            new QueryCountLimitCreator(),
+            new TimeLimitCreator()
+        });
+    }
 
     private ILimit CreateLimit(string yml)
     {

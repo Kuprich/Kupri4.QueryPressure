@@ -1,10 +1,10 @@
-﻿using QueryPressure.Arguments;
+﻿using QueryPressure.App.Arguments;
+using QueryPressure.App.Extensions;
+using QueryPressure.App.Interfaces;
 using QueryPressure.Core.Interfaces;
 using QueryPressure.Core.Limits;
-using QueryPressure.Extensions;
-using QueryPressure.Interfaces;
 
-namespace QueryPressure.LimitCreators;
+namespace QueryPressure.App.LimitCreators;
 
 public class TimeLimitCreator : ICreator<ILimit>
 {

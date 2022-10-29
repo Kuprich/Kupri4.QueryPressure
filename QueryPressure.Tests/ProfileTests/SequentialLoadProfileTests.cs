@@ -1,6 +1,4 @@
-using QueryPressure.LoadProfiles;
-
-namespace QueryPressure.Tests;
+namespace QueryPressure.Tests.ProfileTests;
 
 public class SequentialLoadProfileTests
 {
@@ -11,7 +9,7 @@ public class SequentialLoadProfileTests
         var task = profile.WhenNextCanBeExecutedAsync();
         Assert.True(task.IsCompletedSuccessfully);
     }
-    
+
     [Fact]
     public async Task SequentialLoadProfile_SecondCall_ReturnsCompletedTask()
     {

@@ -1,7 +1,6 @@
 ﻿using QueryPressure.Core.LoadProfiles;
-using QueryPressure.LoadProfiles;
 
-namespace QueryPressure.Tests;
+namespace QueryPressure.Tests.ProfileTests;
 
 public class TargetThroughputLoadProfileTests
 {
@@ -12,7 +11,7 @@ public class TargetThroughputLoadProfileTests
         var task = profile.WhenNextCanBeExecutedAsync();
         Assert.True(task.IsCompleted);
     }
-    
+
     [Fact]
     public async void WhenNextCanBeExecutedAsync_SecondCall_Return_CompletesTaskOnlyAfterDelay()
     {

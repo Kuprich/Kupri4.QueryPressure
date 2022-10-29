@@ -1,8 +1,7 @@
 ﻿// файлы, в которых будет как-то описываться тест. 
-using QueryPressure.Arguments;
-using QueryPressure.Core.Interfaces;
+using QueryPressure.App.Arguments;
 
-namespace QueryPressure.Interfaces;
+namespace QueryPressure.App.Interfaces;
 
 public interface ICreator<T>
 {

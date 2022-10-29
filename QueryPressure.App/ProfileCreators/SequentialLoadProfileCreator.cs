@@ -1,10 +1,9 @@
-﻿
-using QueryPressure.Arguments;
+﻿using QueryPressure.App.Arguments;
+using QueryPressure.App.Interfaces;
 using QueryPressure.Core.Interfaces;
-using QueryPressure.Interfaces;
-using QueryPressure.LoadProfiles;
+using QueryPressure.Core.LoadProfiles;
 
-namespace QueryPressure.ProfileCreators;
+namespace QueryPressure.App.ProfileCreators;
 
 public class SequentialLoadProfileCreator : ICreator<IProfile>
 {

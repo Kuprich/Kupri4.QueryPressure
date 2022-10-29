@@ -1,9 +1,9 @@
 ﻿// файлы, в которых будет как-то описываться тест. 
+using QueryPressure.App.Arguments;
+using QueryPressure.App.Interfaces;
 using QueryPressure.Core.Interfaces;
-using QueryPressure.Interfaces;
-using QueryPressure.Arguments;
 
-namespace QueryPressure.Factories;
+namespace QueryPressure.App.Factories;
 
 public class SettingsFactory<T> where T : ISetting
 {

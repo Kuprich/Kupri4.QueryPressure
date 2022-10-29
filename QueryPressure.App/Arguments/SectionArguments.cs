@@ -7,9 +7,7 @@
  *          connectionString: ${POSTGRES_STRING}
  */
 
-
-
-namespace QueryPressure.Arguments;
+namespace QueryPressure.App.Arguments;
 
 public class SectionArguments
 {
