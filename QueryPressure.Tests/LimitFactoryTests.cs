@@ -21,20 +21,6 @@ public class LimitFactoryTests
         });
     }
 
-    private ILimit CreateLimit(string yml)
-    {
-        var args = Deserialize(yml);
-        return _factory.Create(args);
-    }
-
-    private MainArguments Deserialize(string fileContent)
-    {
-        var deserializer = new DeserializerBuilder()
-            .WithNamingConvention(CamelCaseNamingConvention.Instance)
-            .Build();
-        return deserializer.Deserialize<MainArguments>(fileContent);
-    }
-
     [Fact]
     public void Create_QueryCountLimit_IsCreated()
     {
@@ -43,7 +29,7 @@ limit:
   type: queryCount
   arguments: 
     limit: 100";
-        Assert.IsType<QueryCountLimit>(CreateLimit(yml));
+        Assert.IsType<QueryCountLimit>(TestUtils.Create(_factory, yml));
     }
 
     [Fact]
@@ -54,6 +40,6 @@ limit:
   type: timeLimit
   arguments: 
     limit: 00:00:01";
-        Assert.IsType<TimeLimit>(CreateLimit(yml));
+        Assert.IsType<TimeLimit>(TestUtils.Create(_factory, yml));
     }
 }

@@ -27,27 +27,13 @@ public class LoadProfileFactoryTests
         });
     }
 
-    private IProfile CreateProfile(string yml)
-    {
-        var args = Deserialize(yml);
-        return _factory.Create(args);
-    }
-
-    private MainArguments Deserialize(string fileContent)
-    {
-        var deserializer = new DeserializerBuilder()
-            .WithNamingConvention(CamelCaseNamingConvention.Instance)
-            .Build();
-        return deserializer.Deserialize<MainArguments>(fileContent);
-    }
-
     [Fact]
     public void Create_SequentialLoadProfile_IsCreated()
     {
         var yml = @"
 profile:
   type: sequential";
-        Assert.IsType<SequentialLoadProfile>(CreateProfile(yml));
+        Assert.IsType<SequentialLoadProfile>(TestUtils.Create(_factory, yml));
     }
 
     [Fact]
@@ -59,7 +45,7 @@ profile:
   arguments:
     delay: 00:00:01";
 
-        Assert.IsType<SequentialLoadWithDelayProfile>(CreateProfile(yml));
+        Assert.IsType<SequentialLoadWithDelayProfile>(TestUtils.Create(_factory, yml));
     }
 
     [Fact]
@@ -70,7 +56,7 @@ profile:
   type: LimitedConcurrency
   arguments: 
     limit: 2";
-        Assert.IsType<LimitedConcurrencyLoadProfile>(CreateProfile(yml));
+        Assert.IsType<LimitedConcurrencyLoadProfile>(TestUtils.Create(_factory, yml));
     }
 
 
@@ -81,7 +67,7 @@ profile:
 profile:
   type: limitedConcurrency";
 
-        Assert.Throws<ArgumentException>(() => CreateProfile(yml));
+        Assert.Throws<ArgumentException>(() => TestUtils.Create(_factory, yml));
     }
 
     [Fact]
@@ -93,7 +79,7 @@ profile:
   arguments: 
     limit: InvalidArgument";
 
-        Assert.Throws<ArgumentException>(() => CreateProfile(yml));
+        Assert.Throws<ArgumentException>(() => TestUtils.Create(_factory, yml));
     }
 
     [Fact]
@@ -106,7 +92,7 @@ profile:
     limit: 2
     delay: 00:00:01";
 
-        Assert.IsType<LimitedConcurrencyWithDelayLoadProfile>(CreateProfile(yml));
+        Assert.IsType<LimitedConcurrencyWithDelayLoadProfile>(TestUtils.Create(_factory, yml));
     }
 
     [Fact]
@@ -118,7 +104,7 @@ profile:
   arguments: 
     limit: InvalidArgument";
 
-        Assert.Throws<ArgumentException>(() => CreateProfile(yml));
+        Assert.Throws<ArgumentException>(() => TestUtils.Create(_factory, yml));
     }
 
     [Fact]
@@ -130,7 +116,7 @@ profile:
   arguments:
     rps: 50";
 
-        Assert.IsType<TargetThroughputLoadProfile>(CreateProfile(yml));
+        Assert.IsType<TargetThroughputLoadProfile>(TestUtils.Create(_factory, yml));
     }
 
 }

@@ -34,18 +34,10 @@ profile:
         limit: 10
 ";
 
-var @params = Deserialize(file);
+//var @params = Deserialize(file);
 
 //var factory = new ProfilesFactory(new[] { new LimitedConcurrencyLoadProfileCreator() });
 
 //var model = factory.CreateProfile(@params);
 
 Console.WriteLine();
-
-MainArguments Deserialize(string fileContent)
-{
-    var deserializer = new DeserializerBuilder()
-        .WithNamingConvention(CamelCaseNamingConvention.Instance)
-        .Build();
-    return deserializer.Deserialize<MainArguments>(fileContent);
-}

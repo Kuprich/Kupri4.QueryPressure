@@ -1,3 +1,5 @@
+using QueryPressure.Core.LoadProfiles;
+
 namespace QueryPressure.Tests.ProfileTests;
 
 public class SequentialLoadProfileTests

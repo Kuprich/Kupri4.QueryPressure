@@ -1,16 +1,21 @@
 ﻿using QueryPressure.App.Factories;
 using QueryPressure.App.Interfaces;
+using QueryPressure.Core.Interfaces;
 using QueryPressure.Core.LoadProfiles;
+using QueryPressure.Postgres.App;
+using QueryPressure.Postgres.Core;
 
 namespace QueryPressure.Tests;
 
 public class ConnectionProviderFactoryTests
 {
+	private SettingsFactory<IConnectionProvider> _factory;
+
 	public ConnectionProviderFactoryTests()
 	{
 		_factory = new SettingsFactory<IConnectionProvider>("connection", new ICreator<IConnectionProvider>[]
 		{
-
+			new PostgresConnectionProviderCreator()
 		});
 	}
 
@@ -23,6 +28,6 @@ connection:
   arguments:
     connectionString: ${POSTGRES_STRING}";
 
-        Assert.IsType<TargetThroughputLoadProfile>(CreateConnection(yml));
-    }
+		Assert.IsType<PostgresConnectionProvider>(TestUtils.Create(_factory, yml));
+	}
 }

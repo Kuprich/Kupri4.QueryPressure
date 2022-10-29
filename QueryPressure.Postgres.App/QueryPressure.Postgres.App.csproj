@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\QueryPressure.App\QueryPressure.App.csproj" />
+    <ProjectReference Include="..\QueryPressure.Core\QueryPressure.Core.csproj" />
+    <ProjectReference Include="..\QueryPressure.Postgres.Core\QueryPressure.Postgres.Core.csproj" />
+  </ItemGroup>
+
 </Project>
