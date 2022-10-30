@@ -1,14 +1,10 @@
-﻿using QueryPressure.App.Arguments;
-using QueryPressure.App.Factories;
+﻿using QueryPressure.App.Factories;
 using QueryPressure.App.Interfaces;
 using QueryPressure.App.ProfileCreators;
 using QueryPressure.Core.Interfaces;
 using QueryPressure.Core.LoadProfiles;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
 
 namespace QueryPressure.Tests;
-
 
 
 public class LoadProfileFactoryTests
