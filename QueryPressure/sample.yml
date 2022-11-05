@@ -1,0 +1,14 @@
+﻿profile:
+  type: LimitedConcurrency
+  arguments: 
+    limit: 2
+
+limit:
+  type: queryCount
+  arguments: 
+    limit: 100
+
+connection:
+  type: postgres
+  arguments:
+    connectionString: Host=localhost;Database=postgres;User Id=postgres;Password=112

@@ -28,6 +28,9 @@ connection:
   arguments:
     connectionString: ${POSTGRES_STRING}";
 
-		Assert.IsType<PostgresConnectionProvider>(TestUtils.Create(_factory, yml));
+		var provider = TestUtils.Create(_factory, yml);
+
+
+        Assert.IsType<PostgresConnectionProvider>(TestUtils.Create(_factory, yml));
 	}
 }

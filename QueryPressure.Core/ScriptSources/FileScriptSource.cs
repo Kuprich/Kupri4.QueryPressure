@@ -11,15 +11,16 @@ public class FileScriptSource : IScriptSource
         _path = path;
     }
 
-    public Script GetScript()
+    public async Task<Script> GetScriptAsync(CancellationToken cancellationToken = default)
     {
         if (!File.Exists(_path))
         {
             throw new FileNotFoundException($"File \"{_path}\" not exist!");
         }
 
-        string text = File.ReadAllText(_path);
+        string text = await File.ReadAllTextAsync(_path, cancellationToken);
 
         return new TextScript(text);
     }
+
 }

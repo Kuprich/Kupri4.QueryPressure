@@ -2,5 +2,5 @@
 
 public interface IScriptSource : ISetting
 {
-    Script GetScript();
+    Task<Script> GetScriptAsync(CancellationToken cancellationToken = default);
 }

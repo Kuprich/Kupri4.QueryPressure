@@ -2,10 +2,10 @@
 
 public class TextScript : Script
 {
-    private readonly string _text;
+    public string Text { get; init; }
 
     public TextScript(string text)
     {
-        _text = text;
+        Text = text;
     }
 }

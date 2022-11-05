@@ -33,20 +33,21 @@ public class QueryExecutor
         _hooks = hooks.ToImmutableArray();
     }
 
-    public async Task ExecuteAsync(CancellationToken cancellationToken)
+    public async Task ExecuteAsync(CancellationToken cancellationToken = default)
     {
+        var source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _limit.Token);
+        var token = source.Token;
         var sw = Stopwatch.StartNew();
         while (cancellationToken.IsCancellationRequested)
         {
-            await _loadProfile.WhenNextCanBeExecutedAsync(cancellationToken);
+            await _loadProfile.WhenNextCanBeExecutedAsync(token);
 
-            _ = _executable.ExecuteAsync(cancellationToken)
+            _ = _executable.ExecuteAsync(token)
                 .ContinueWith(async _ =>
                 {
-                    await Task.WhenAll(_hooks.Select(x => x.OnQueryExecutedAsync(cancellationToken)));
-                }, cancellationToken);
+                    await Task.WhenAll(_hooks.Select(x => x.OnQueryExecutedAsync(token)));
+                }, token);
             Console.WriteLine(sw.ElapsedMilliseconds);
         }
-        await _executable.ExecuteAsync(cancellationToken);
     }
 }

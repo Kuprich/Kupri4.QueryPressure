@@ -1,43 +1,85 @@
-﻿// файлы, в которых будет как-то описываться тест. 
-using YamlDotNet.Serialization;
+﻿
+using QueryPressure.App.Arguments;
 using YamlDotNet.Serialization.NamingConventions;
+using YamlDotNet.Serialization;
+using QueryPressure.App;
+using QueryPressure.App.Factories;
+using QueryPressure.App.Interfaces;
+using QueryPressure.App.ProfileCreators;
+using QueryPressure.Core.Interfaces;
+using QueryPressure.App.LimitCreators;
+using QueryPressure.Postgres.App;
+using QueryPressure.App.ScriptSourceCreators;
 
-var file = @"
-profile:
-    type: limitedConcurrency
-    arguments: 
-        limit: 10
-limit: 
-    type: queryCount
-    arguments: 
-        limit: 100
-connecition:
-    type: Postgres
-    connectionString: ${POSTGRES_STRING}   
-execution: 
-    type: query
-    argumens: 
-        sql: 'SELECT * FROM sys.allobjects' 
-reports: 
-    type: csv
-    arguments: 
-        output: file.csv
-";
+var profileFactory = new SettingsFactory<IProfile>("profile", new ICreator<IProfile>[]
+        {
+            new SequentialLoadProfileCreator(),
+            new SequentialLoadWithDelayProfileCreator(),
+            new LimitedConcurrencyLoadProfileCreator(),
+            new LimitedConcurrencyWithDelayLoadProfileCreator(),
+            new TargetThroughputLoadProfileCreator()
+        });
 
-// далее, все это дело парсится, а запускаться это дело будет сл. образом
-//var shell = "querystress bechmark.yml";
+var limitFactory = new SettingsFactory<ILimit>("limit", new ICreator<ILimit>[]
+        {
+            new QueryCountLimitCreator(),
+            new TimeLimitCreator()
+        });
 
-file = @"
-profile:
-    type: limitedConcurrency
-    arguments: 
-        limit: 10
-";
+var connectionProviderFactory = new SettingsFactory<IConnectionProvider>("connection", new ICreator<IConnectionProvider>[]
+        {
+            new PostgresConnectionProviderCreator()
+        });
 
-//var @params = Deserialize(file);
+var scriptSourceFactory = new SettingsFactory<IScriptSource>("script", new ICreator<IScriptSource>[]
+       {
+            new FileScriptSourceCreator()
+       });
 
-//var factory = new ProfilesFactory(new[] { new LimitedConcurrencyLoadProfileCreator() });
+var mainArgs = Merge(args);
 
-//var model = factory.CreateProfile(@params);
+var builder = new ScenarioBuilder(profileFactory, limitFactory, connectionProviderFactory, scriptSourceFactory);
+var executor = await builder.BuildAsync(mainArgs);
+await executor.ExecuteAsync();
+
 
 Console.WriteLine();
+
+MainArguments Merge(string[] args)
+{
+    var configExtention = new[] { ".yml", ".yaml" };
+    var scriptExtension = ".sql";
+
+    var configFiles = args.Where(x => configExtention.Contains(Path.GetExtension(x)));
+    var scriptFile = args.Single(x => scriptExtension.Equals(Path.GetExtension(x)));
+
+    MainArguments result = new();
+    foreach (var configFile in configFiles)
+    {
+        var mainArgs = Deserialize(File.ReadAllText(configFile));
+
+        foreach (var mainArg in mainArgs)
+        {
+            result.Add(mainArg.Key, mainArg.Value);
+        }
+    }
+
+    result.Add("script", new SectionArguments
+    {
+        Type = "file",
+        Arguments = new()
+        {
+            ["path"] = scriptFile
+        }
+    });
+
+    return result;
+}
+
+MainArguments Deserialize(string fileContent)
+{
+    var deserializer = new DeserializerBuilder()
+        .WithNamingConvention(CamelCaseNamingConvention.Instance)
+        .Build();
+    return deserializer.Deserialize<MainArguments>(fileContent);
+}
